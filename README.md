@@ -1,1 +1,1 @@
-# Liferay
+# Liferay Front-End Base Resources 
