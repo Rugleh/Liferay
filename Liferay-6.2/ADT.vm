@@ -1,0 +1,59 @@
+
+## Liferay 6.2
+## ADT example
+## Velocity
+## ADT.vm
+
+#if (!$entries.isEmpty())
+    
+    #foreach ($entry in $entries)
+
+        #set( $renderer = $entry.getAssetRenderer() )
+        #set( $className = $renderer.getClassName() )
+
+        ## if ADT
+        #if ( $className == "com.liferay.portlet.journal.model.JournalArticle" )
+            #set( $journalArticle = $renderer.getArticle() )
+            #set( $document = $saxReaderUtil.read($journalArticle.getContent()) )
+            #set( $rootElement = $document.getRootElement() )
+
+            #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='contenido']") )
+            #set( $descripcionNoticia = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+
+            ## Date variable
+            #set( $date = $dateTool.format("dd/MM/yyyy", $dateTool.toDate( "EEE, dd MMM yyyy hh:mm:ss Z" , $entry.getPublishDate())))
+            
+            ## Custom structures variables
+            #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='titulo']") )
+            #set( $tituloNoticia = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+
+            #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='imagen']") )
+            #set( $imageNoticia = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+
+            #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='bajada']") )
+            #set( $bajadaNoticia = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+
+            #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='link1']") )
+            #set( $link1 = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+
+            #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='link2']") )
+            #set( $link2 = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+        
+            ## URL variable
+            #set( $viewURL = $assetPublisherHelper.getAssetViewURL($renderRequest, $renderResponse, $entry))
+            #set( $viewURL = $renderer.getURLViewInContext($renderRequest, $renderResponse, $viewURL))
+
+        
+            $viewURL
+            $imageNoticia
+            $tituloNoticia
+            $date 
+            $bajadaNoticia
+            $descripcionNoticia
+            $link1
+            $link2
+            
+            
+        #end
+    #end
+#end	
