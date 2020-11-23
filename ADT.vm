@@ -1,0 +1,24 @@
+#if (!$entries.isEmpty())
+                
+    #foreach ($entry in $entries)
+
+        #set( $renderer = $entry.getAssetRenderer() )
+        #set( $className = $renderer.getClassName() )
+        #if ( $className == "com.liferay.portlet.journal.model.JournalArticle" )
+            #set( $journalArticle = $renderer.getArticle() )
+            #set( $document = $saxReaderUtil.read($journalArticle.getContent()) )
+            #set( $rootElement = $document.getRootElement() )
+
+            #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='Texto_alerta']") )
+            #set( $Texto_alerta = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+
+            #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='Link']") )
+            #set( $Link = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+
+            <div class="aguas-alerta text-center">
+                <i class="icon-warning-sign"></i> <span class="aguas-alerta__text"> $Texto_alerta </span> <span class="aguas-alerta__link"> $Link </span>
+            </div>
+
+        #end
+    #end
+#end	
