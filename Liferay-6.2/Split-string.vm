@@ -1,3 +1,9 @@
+## Liferay 6.2
+## Split String example for correct news URL visualization
+## Velocity
+## Split-string.vm
+
+
 #set( $viewURL = $assetPublisherHelper.getAssetViewURL($renderRequest, $renderResponse, $entry))
 #set( $viewURL = $renderer.getURLViewInContext($renderRequest, $renderResponse, $viewURL))
 
