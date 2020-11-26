@@ -1,0 +1,9 @@
+#set( $viewURL = $assetPublisherHelper.getAssetViewURL($renderRequest, $renderResponse, $entry))
+#set( $viewURL = $renderer.getURLViewInContext($renderRequest, $renderResponse, $viewURL))
+
+#set ( $viewURLNews = $viewURL.replace("home", "noticias") )         
+#set ( $viewURLNews2 = $viewURLNews.replace("ddxaKWdLlP78", "5MJZgh0vDAGo"))
+
+#set ( $viewURLFinal = $viewURLNews2.split("[?]"))
+
+$viewURLFinal.get(0)
